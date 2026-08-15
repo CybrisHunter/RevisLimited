@@ -17,24 +17,24 @@ var facingVector := Vector2.ZERO #Vector for facing control
 @onready var sprite := $AnimatedSprite2D
 @onready var StaminaLabel := $StaminaLabel
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	updateFacingDirection()
 	readInput()
 	
 	move_and_slide()
 	
-	var moved = velocity.length() > 0.1
+	var moved : float = velocity.length() > 0.1
 	updateStamina(moved)
 	updateAnimation()
 	
 	StaminaLabel.text = str(staminaAmount)
 
 #Reads movement input and produces a normalized movement vector
-func readInput():
+func readInput() -> void:
 	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	if velocity:
-		var move_speed = baseSpeed
+		var move_speed : int = baseSpeed
 		
 		if Input.is_action_pressed("sprint") and staminaToggle:
 			move_speed = sprintSpeed
@@ -46,7 +46,7 @@ func readInput():
 		sprite.speed_scale = 1
 
 #Updates stamina drain, regeneration, and sprint lock/unlock
-func updateStamina(moved):
+func updateStamina(moved : float) -> void:
 	if staminaToggle:
 		if staminaAmount <= 0:
 			staminaToggle = false
@@ -62,8 +62,8 @@ func updateStamina(moved):
 
 #Calculates if the player is facing the direction they move and returns a penalty value
 func movementPenalty() -> float:
-	var move_dir = velocity.normalized()
-	var alignment = move_dir.dot(facingVector)
+	var move_dir : Vector2 = velocity.normalized()
+	var alignment : float = move_dir.dot(facingVector)
 	
 	if alignment > 0.5: #Facing Mostly same direction
 		return 1.0
@@ -73,15 +73,15 @@ func movementPenalty() -> float:
 		return 0.7
 
 #Updates the facing direction for animation based on mouse position in relation to player
-func updateFacingDirection():
-	var controller_dir = get_controller_facing()
+func updateFacingDirection() -> void:
+	var controller_dir :Vector2 = get_controller_facing()
 	if controller_dir.length() > 0.2:
 		setFacingFromVector(controller_dir)
 		return
-	var mouse_dir = (get_global_mouse_position() - global_position)
+	var mouse_dir : Vector2 = (get_global_mouse_position() - global_position)
 	setFacingFromVector(mouse_dir)
 
-func setFacingFromVector(vect: Vector2):
+func setFacingFromVector(vect : Vector2) -> void:
 	#Updates the global variable for facing Vector
 	facingVector = vect.normalized()
 	
@@ -99,9 +99,9 @@ func get_controller_facing() -> Vector2:
 	return Input.get_vector("look_left", "look_right", "look_up", "look_down")
 
 #Plays idle or walking animations based on movement and direction
-func updateAnimation():
+func updateAnimation() -> void:
 	#if velocity is 0 play idle animations, else walk animations (Idlex and walkX flip_h based on direction)
-	var is_idle = velocity == Vector2.ZERO
+	var is_idle : bool = (velocity == Vector2.ZERO)
 	
 	if facingDirection in ["Left", "Right"]:
 		sprite.flip_h = facingDirection == "Left"

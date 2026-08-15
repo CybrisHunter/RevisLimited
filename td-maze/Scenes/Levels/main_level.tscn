@@ -31,7 +31,7 @@ tile_set = ExtResource("1_o3eya")
 [node name="Player" parent="." unique_id=735246305 instance=ExtResource("1_popic")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=595636425]
-zoom = Vector2(3, 3)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
