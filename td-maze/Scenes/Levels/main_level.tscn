@@ -35,17 +35,17 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
-[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=273297468]
+[node name="PointLight2D2" type="PointLight2D" parent="Player" unique_id=273297468]
 position = Vector2(0, 3)
 scale = Vector2(1.5625, 1.5625)
-energy = 0.6
+energy = 0.4
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_4c5yi")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1856558663]
-color = Color(0.27382293, 0.29745483, 0.3031136, 1)
+color = Color(0.049394004, 0.06982283, 0.13051498, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=566826287]
 editor_only = true
-color = Color(0.29759654, 0.36656865, 0.3772347, 1)
+color = Color(0.2804743, 0.36731178, 0.40523782, 1)
 energy = 0.2

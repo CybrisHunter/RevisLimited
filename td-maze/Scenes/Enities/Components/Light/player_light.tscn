@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c7bmjrhc6k8dx"]
+
+[ext_resource type="Texture2D" uid="uid://488w5x7yulfc" path="res://Art/Lights/flashlight.png" id="1_paaiv"]
+[ext_resource type="Script" uid="uid://4ogw3lbxdiwi" path="res://Scenes/Enities/Components/Light/player_light.gd" id="2_1kidb"]
+
+[node name="PlayerLight" type="PointLight2D" unique_id=539826183]
+color = Color(0.6542345, 0.6200664, 0.5805107, 1)
+shadow_enabled = true
+texture = ExtResource("1_paaiv")
+offset = Vector2(0, -38)
+script = ExtResource("2_1kidb")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1896228095]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=18238376]
+polygon = PackedVector2Array(0, 0, -45, -80, 45, -80)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

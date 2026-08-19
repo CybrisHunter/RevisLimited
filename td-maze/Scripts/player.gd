@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export_group("Movement")
-@export var baseSpeed := 100 #Player base speed.
-@export var sprintSpeed := 200 #Player sprint speed.
+@export var baseSpeed := 50 #Player base speed.
+@export var sprintSpeed := 100 #Player sprint speed.
 
 @export_group("Stamina")
 @export var staminaAmountCap := 200 #Player stamina Maximum.
@@ -14,6 +14,7 @@ var staminaAmount := staminaAmountCap #Current amount of stanima
 var facingDirection := "Down" #Direction the player is facing
 var facingVector := Vector2.ZERO #Vector for facing control
 
+@onready var playerLight := $PlayerLight
 @onready var sprite := $AnimatedSprite2D
 @onready var StaminaLabel := $StaminaLabel
 
@@ -80,6 +81,7 @@ func updateFacingDirection() -> void:
 		return
 	var mouse_dir : Vector2 = (get_global_mouse_position() - global_position)
 	setFacingFromVector(mouse_dir)
+	playerLight.rotation = mouse_dir.angle() + PI/2 #PI/2 adjusts the angle to point correct
 
 func setFacingFromVector(vect : Vector2) -> void:
 	#Updates the global variable for facing Vector
